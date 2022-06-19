@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import generalDataSchema from '../models/generalData.js';
-import AirtempratureDataSchema from '../models/Airtemprature.js';
+import AirtempratureDataSchema from '../models/AirTemprature.js';
 import SoiltempratureDataSchema from '../models/SoilTemprature.js';
 import waterDataSchema from '../models/watermodel.js';
 
