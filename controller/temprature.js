@@ -9,17 +9,7 @@ export const tempratureGet = async (req,res) =>{
   try {
     const generalData = await generalDataSchema.findOne({_id: "62af050cc94e5ed195f7d367"})
 
-    const airTemprature =  await AirtempratureDataSchema.find();
-    const soilTemprature = await SoiltempratureDataSchema.find();
-    const waterData = await waterDataSchema.find()
-
-    // if(airTemprature && soilTemprature && waterData){
-    //   generalData.AirData.push(airTemprature[airTemprature.length - 1]);
-    //   generalData.SoilData.push(soilTemprature[soilTemprature.length - 1]);
-    //   generalData.WaterData.push(waterData[waterData.length - 1]);
-    // }
     
-    // await generalData.save();
 
     res.status(201).json(generalData);
   } catch (error) {
@@ -33,7 +23,14 @@ export const tempraturePost = async (req,res) =>{
   const {airTemp,soilTemp,humidity,moisture,flow,level} = req.body
   // console.log(req.body)
   try {
+    let generalData = await generalDataSchema.findOne({_id:"mk298anwgkeni61wy5m6uefbk"})
+    if(!generalData){
+      generalData = new generalDataSchema({
+        _id:"mk298anwgkeni61wy5m6uefbk"
+      })
+    }
     
+
     const airTemprature = AirtempratureDataSchema({
       temp:airTemp,
       humidity:humidity
@@ -49,14 +46,22 @@ export const tempraturePost = async (req,res) =>{
       flow:flow
     })
 
-    await airTemprature.save();
-    await soilTemprature.save();
-    await waterData.save();
-    
 
 
+    // await airTemprature.save();
+    // await soilTemprature.save();
+    // await waterData.save();
     
-    res.status(201).json({airTemprature,soilTemprature,waterData})
+    if(airTemprature && soilTemprature && waterData){
+      generalData.AirData.push(airTemprature);
+      generalData.SoilData.push(soilTemprature);
+      generalData.WaterData.push(waterData);
+    }
+    
+    await generalData.save();
+
+    
+    res.status(201).json(generalData)
 
     
 
