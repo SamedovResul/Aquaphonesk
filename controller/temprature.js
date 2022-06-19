@@ -7,8 +7,8 @@ import waterDataSchema from '../models/watermodel.js';
 export const tempratureGet = async (req,res) =>{
  
   try {
-    const generalData = await generalDataSchema.findOne({_id: "62af050cc94e5ed195f7d367"})
-
+    const generalData = await generalDataSchema.findOne({_id: "mk298anwgkeni61wy5m6uefbk"})
+    
     
 
     res.status(201).json(generalData);
