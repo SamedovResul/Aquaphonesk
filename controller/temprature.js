@@ -10,8 +10,8 @@ export const tempratureGet = async (req,res) =>{
     const generalData = await generalDataSchema.findOne({_id: "mk298anwgkeni61wy5m6uefbk"})
     
     
-
-    res.status(201).json(generalData);
+    console.log(generalData)
+    res.status(201).json({generalData});
   } catch (error) {
     res.status(500).json(error.message)
   }
@@ -52,11 +52,9 @@ export const tempraturePost = async (req,res) =>{
     // await soilTemprature.save();
     // await waterData.save();
     
-    if(airTemprature && soilTemprature && waterData){
       generalData.AirData.push(airTemprature);
       generalData.SoilData.push(soilTemprature);
       generalData.WaterData.push(waterData);
-    }
     
     await generalData.save();
 
