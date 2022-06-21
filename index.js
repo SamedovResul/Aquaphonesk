@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors'
 import dotenv from 'dotenv';
 import temprature from './router/index.js'
+import user from './router/user.js'
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(express.urlencoded({limit: "30mb", extended: true}));
 
 
 app.use('/',temprature)
+app.use('/sign',user)
 
 const PORT = process.env.PORT || 8888
 
